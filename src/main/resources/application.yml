@@ -1,0 +1,11 @@
+server:
+  port: 8882
+spring:
+  datasource:
+  password: 1234567
+  username: root
+  url: jdbc:mysql://localhost:3306/dbplus
+
+  flyway:
+    enabled: true
+
