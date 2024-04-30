@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "Users")
 public class Users implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -33,7 +35,7 @@ public class Users implements Serializable {
     private UserType userType;
 
 
-    @JoinColumn(name = "subscriptions_type")
+    @JoinColumn(name = "subscriptions_type_id")
     @ManyToOne
     private SubscriptionsType subscriptionsType;
 

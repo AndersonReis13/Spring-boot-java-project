@@ -2,11 +2,12 @@ package com.client.ws.agiletech.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "subscriptions_type")
-public class SubscriptionsType {
+public class SubscriptionsType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
