@@ -17,14 +17,14 @@ import java.math.BigDecimal;
 @Table(name = "subscriptions_type")
 public class SubscriptionsType implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "subscriptions_type_id")
+    private Long subscriptions_type_id;
+    
     private String name;
 
-    @Column( name = "acess_months",nullable = false)
-    private Integer acessMonth;
+    @Column( name = "access_months",nullable = false)
+    private Integer accessMonth;
 
     private BigDecimal price;
 
