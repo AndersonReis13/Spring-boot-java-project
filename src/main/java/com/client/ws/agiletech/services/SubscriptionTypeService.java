@@ -20,12 +20,6 @@ public class SubscriptionTypeService {
     public List<SubscriptionsType> findAll(){
         logger.info("finding all subscriptions");
 
-        List<SubscriptionsType> list = repository.findAll();
-
-        for(SubscriptionsType l : list){
-            System.out.println(l);
-        }
-
         return repository.findAll();
     }
 
@@ -41,13 +35,16 @@ public class SubscriptionTypeService {
     public SubscriptionsType create(SubscriptionsType subscriptionsType){
         logger.info("creating one subscription");
 
-        return null;
+        return repository.save(subscriptionsType);
     }
 
     public void delete(Long id){
         logger.info("deleting one subscription");
 
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("Id not found, deleting impossible"));
 
+        repository.delete(entity);
     }
 
 

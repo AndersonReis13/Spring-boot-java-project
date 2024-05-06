@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/subscription")
+@RequestMapping(value = "/agile/subscription")
 public class SubscriptionTypeController {
 
     @Autowired

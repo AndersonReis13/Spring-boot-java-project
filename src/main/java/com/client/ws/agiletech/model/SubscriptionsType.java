@@ -1,5 +1,7 @@
 package com.client.ws.agiletech.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +17,12 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Table(name = "subscriptions_type")
+@JsonPropertyOrder({"id", "name", "acess_months", "price", "product_key"})
 public class SubscriptionsType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long subscriptions_type_id;
+    @JsonProperty(value = "id")
+    private Long subscriptionsTypeId;
     
     private String name;
 
