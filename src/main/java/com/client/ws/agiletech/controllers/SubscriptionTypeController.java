@@ -8,13 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/subscription/v1")
+@RequestMapping(value = "/subscription")
 public class SubscriptionTypeController {
 
     @Autowired
@@ -22,7 +24,12 @@ public class SubscriptionTypeController {
 
     @GetMapping
     public List<SubscriptionsType> findAll(){
-        return service.FindAll();
+        return service.findAll();
+    }
+
+    @GetMapping(value = "{id}")
+    public Optional<SubscriptionsType> findById(@PathVariable(value = "id") String id) throws Exception{
+        return service.findById(Long.valueOf(id));
     }
 
 }
