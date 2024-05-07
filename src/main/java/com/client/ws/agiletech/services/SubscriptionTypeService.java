@@ -23,13 +23,11 @@ public class SubscriptionTypeService {
         return repository.findAll();
     }
 
-    public Optional<SubscriptionsType> findById(Long id){
+    public SubscriptionsType findById(Long id){
         logger.info("finding one subscription");
 
-        var entity = repository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundExceptions("Subscription not found"));
-
-        return repository.findById(id);
     }
 
     public SubscriptionsType create(SubscriptionsType subscriptionsType){
