@@ -1,5 +1,7 @@
 package com.client.ws.agiletech.services;
 
+import com.client.ws.agiletech.dto.SubscriptionsTypeDto;
+import com.client.ws.agiletech.exceptions.BadRequestException;
 import com.client.ws.agiletech.exceptions.ResourceNotFoundExceptions;
 import com.client.ws.agiletech.model.SubscriptionsType;
 import com.client.ws.agiletech.repositories.SubscriptionTypeRepository;
@@ -30,10 +32,35 @@ public class SubscriptionTypeService {
                 .orElseThrow(() -> new ResourceNotFoundExceptions("Subscription not found"));
     }
 
-    public SubscriptionsType create(SubscriptionsType subscriptionsType){
+    public SubscriptionsType create(SubscriptionsTypeDto dto){
         logger.info("creating one subscription");
 
-        return repository.save(subscriptionsType);
+        return repository.save(SubscriptionsType.builder()
+                        .subscriptionsTypeId(dto.getSubscriptionsTypeId())
+                        .name(dto.getName())
+                        .accessMonth(dto.getAccessMonth())
+                        .price(dto.getPrice())
+                        .productKey(dto.getProductKey())
+                .build());
+    }
+
+    public SubscriptionsType update(SubscriptionsTypeDto dto){
+        var entity = repository.findById(dto.getSubscriptionsTypeId())
+                .orElseThrow(()-> new BadRequestException("subscription not found"));
+       entity.setSubscriptionsTypeId(dto.getSubscriptionsTypeId());
+       entity.setName(dto.getName());
+       entity.setAccessMonth(dto.getAccessMonth());
+       entity.setPrice(dto.getPrice());
+       entity.setProductKey(dto.getProductKey());
+
+       return repository.save(SubscriptionsType.builder()
+                       .productKey(entity.getProductKey())
+                       .subscriptionsTypeId(entity.getSubscriptionsTypeId())
+                       .price(entity.getPrice())
+                       .accessMonth(entity.getAccessMonth())
+                       .name(entity.getName())
+               .build());
+
     }
 
     public void delete(Long id){

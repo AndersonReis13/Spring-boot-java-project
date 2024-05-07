@@ -1,5 +1,6 @@
-package com.client.ws.agiletech.exceptionshandle;
+package com.client.ws.agiletech.exceptions.exceptionshandle;
 
+import com.client.ws.agiletech.exceptions.BadRequestException;
 import com.client.ws.agiletech.exceptions.ExceptionsResponse;
 import com.client.ws.agiletech.exceptions.ResourceNotFoundExceptions;
 import org.springframework.http.HttpStatus;
@@ -37,5 +38,13 @@ public class CostomizedExceptionsEntityHandle extends ResponseEntityExceptionHan
         return new ResponseEntity<>(exceptionsResponse, HttpStatus.NOT_FOUND);
     }
 
+    public final ResponseEntity<ExceptionsResponse> badRequestExceptions(Exception ex,
+                                                                         WebRequest request){
+        ExceptionsResponse exceptionsResponse = new ExceptionsResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionsResponse, HttpStatus.BAD_REQUEST);
+    }
 
 }

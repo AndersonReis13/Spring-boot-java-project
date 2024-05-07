@@ -1,4 +1,4 @@
-package com.client.ws.agiletech.model.dto;
+package com.client.ws.agiletech.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

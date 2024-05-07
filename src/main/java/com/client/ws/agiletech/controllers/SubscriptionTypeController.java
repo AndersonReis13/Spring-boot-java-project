@@ -1,5 +1,6 @@
 package com.client.ws.agiletech.controllers;
 
+import com.client.ws.agiletech.dto.SubscriptionsTypeDto;
 import com.client.ws.agiletech.model.SubscriptionsType;
 import com.client.ws.agiletech.services.SubscriptionTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,14 @@ public class SubscriptionTypeController {
     }
 
     @PostMapping
-    public SubscriptionsType create(@RequestBody SubscriptionsType subscriptionsType){
-        return service.create(subscriptionsType);
+    public SubscriptionsType create(@RequestBody SubscriptionsTypeDto dto) {
+        return service.create(dto);
     }
+
+    @PutMapping
+    public SubscriptionsType update(SubscriptionsTypeDto dto){
+        return service.update(dto);
+    }
+
 
 }
