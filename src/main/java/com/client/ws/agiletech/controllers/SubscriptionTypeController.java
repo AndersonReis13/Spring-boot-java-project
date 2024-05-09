@@ -4,6 +4,8 @@ import com.client.ws.agiletech.dto.SubscriptionsTypeDto;
 import com.client.ws.agiletech.model.SubscriptionsType;
 import com.client.ws.agiletech.services.SubscriptionTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,24 +18,28 @@ public class SubscriptionTypeController {
     private SubscriptionTypeService service;
 
     @GetMapping
-    public List<SubscriptionsType> findAll(){
-        return service.findAll();
+    public ResponseEntity<List<SubscriptionsType>> findAll(){
+        return ResponseEntity.ok().body( service.findAll());
     }
 
     @GetMapping(value = "{id}")
-    public SubscriptionsType findById(@PathVariable(value = "id") String id) throws Exception{
-        return service.findById(Long.valueOf(id));
+    public ResponseEntity<SubscriptionsType> findById(@PathVariable(value = "id") Long id) throws Exception{
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
-    public SubscriptionsType create(@RequestBody SubscriptionsTypeDto dto) {
-        return service.create(dto);
+    public ResponseEntity<SubscriptionsType> create(@RequestBody SubscriptionsTypeDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
-    @PutMapping
-    public SubscriptionsType update(SubscriptionsTypeDto dto){
-        return service.update(dto);
+    @PutMapping(value = "{id}")
+    public ResponseEntity<SubscriptionsType> update(@PathVariable(value = "id") Long id, @RequestBody SubscriptionsTypeDto dto){
+        return ResponseEntity.ok().body(service.update(dto, id));
     }
 
-
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
+            service.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
 }

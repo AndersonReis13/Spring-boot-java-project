@@ -3,6 +3,7 @@ package com.client.ws.agiletech.services;
 import com.client.ws.agiletech.dto.SubscriptionsTypeDto;
 import com.client.ws.agiletech.exceptions.BadRequestException;
 import com.client.ws.agiletech.exceptions.ResourceNotFoundExceptions;
+import com.client.ws.agiletech.mapper.SubscriptionTypeMapper;
 import com.client.ws.agiletech.model.SubscriptionsType;
 import com.client.ws.agiletech.repositories.SubscriptionTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,32 +36,17 @@ public class SubscriptionTypeService {
     public SubscriptionsType create(SubscriptionsTypeDto dto){
         logger.info("creating one subscription");
 
-        return repository.save(SubscriptionsType.builder()
-                        .subscriptionsTypeId(dto.getSubscriptionsTypeId())
-                        .name(dto.getName())
-                        .accessMonth(dto.getAccessMonth())
-                        .price(dto.getPrice())
-                        .productKey(dto.getProductKey())
-                .build());
+        return repository.save(SubscriptionTypeMapper.dtoToEntity(dto));
     }
 
-    public SubscriptionsType update(SubscriptionsTypeDto dto){
-        var entity = repository.findById(dto.getSubscriptionsTypeId())
+    public SubscriptionsType update(SubscriptionsTypeDto dto, Long id){
+
+        logger.info("Updated one subscription");
+
+        var entity = repository.findById(id)
                 .orElseThrow(()-> new BadRequestException("subscription not found"));
-       entity.setSubscriptionsTypeId(dto.getSubscriptionsTypeId());
-       entity.setName(dto.getName());
-       entity.setAccessMonth(dto.getAccessMonth());
-       entity.setPrice(dto.getPrice());
-       entity.setProductKey(dto.getProductKey());
-
-       return repository.save(SubscriptionsType.builder()
-                       .productKey(entity.getProductKey())
-                       .subscriptionsTypeId(entity.getSubscriptionsTypeId())
-                       .price(entity.getPrice())
-                       .accessMonth(entity.getAccessMonth())
-                       .name(entity.getName())
-               .build());
-
+        dto.setSubscriptionsTypeId(id);
+       return repository.save(SubscriptionTypeMapper.dtoToEntity(dto));
     }
 
     public void delete(Long id){
