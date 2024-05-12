@@ -3,6 +3,7 @@ package com.client.ws.agiletech.controllers;
 import com.client.ws.agiletech.dto.SubscriptionsTypeDto;
 import com.client.ws.agiletech.model.SubscriptionsType;
 import com.client.ws.agiletech.services.SubscriptionTypeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class SubscriptionTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<SubscriptionsType> create(@RequestBody SubscriptionsTypeDto dto) {
+    public ResponseEntity<SubscriptionsType> create( @Valid @RequestBody SubscriptionsTypeDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
@@ -42,4 +43,5 @@ public class SubscriptionTypeController {
             service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
 }
