@@ -23,7 +23,8 @@ import java.util.Map;
 
 @ControllerAdvice
 @RestController
-public class CostomizedExceptionsEntityHandle extends ResponseEntityExceptionHandler {
+public class CostomizedExceptionsEntityHandle{
+
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorResponseDto> handleAllExceptions(Exception ex){

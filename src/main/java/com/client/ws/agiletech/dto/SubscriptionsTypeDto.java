@@ -1,5 +1,7 @@
 package com.client.ws.agiletech.dto;
 
+
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -23,7 +25,7 @@ public class SubscriptionsTypeDto{
     @Size(min = 5, max = 30)
     private String name;
 
-    @NotBlank(message = "access months is cant bigger than 12")
+    @Max(value = 12, message = "access months is cant bigger than 12")
     private Integer accessMonths;
 
     @NotNull(message = "price is not null")

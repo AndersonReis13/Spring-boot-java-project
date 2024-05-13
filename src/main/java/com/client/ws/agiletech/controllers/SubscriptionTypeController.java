@@ -29,7 +29,7 @@ public class SubscriptionTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<SubscriptionsType> create( @Valid @RequestBody SubscriptionsTypeDto dto) {
+    public ResponseEntity<SubscriptionsType> create(@RequestBody  @Valid SubscriptionsTypeDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
