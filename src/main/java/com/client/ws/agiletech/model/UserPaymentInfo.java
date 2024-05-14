@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -43,7 +42,7 @@ public class UserPaymentInfo implements Serializable {
 
     @PrimaryKeyJoinColumn(name = "user_id")
     @OneToOne(fetch = FetchType.LAZY)
-    private Users user;
+    private User user;
 
 
 

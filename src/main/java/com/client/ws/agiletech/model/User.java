@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "Users")
-public class Users implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
