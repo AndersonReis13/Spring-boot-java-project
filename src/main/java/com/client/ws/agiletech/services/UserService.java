@@ -39,7 +39,7 @@ public class UserService {
     public User create(UserDto dto){
         logger.info("creating User!");
 
-        if(Objects.nonNull(dto.getId())){throw new BadRequestException("this id is null");}
+        if(Objects.nonNull(dto.getUserId())){throw new BadRequestException("this id is null");}
 
         var entityUserType = userTypeRepository.findById(dto.getUserTypeId())
                 .orElseThrow(() -> new ResourceNotFoundExceptions("User type id not found!"));
@@ -59,7 +59,7 @@ public class UserService {
         var entityType = userTypeRepository.findById(dto.getUserTypeId())
                 .orElseThrow(() -> new ResourceNotFoundExceptions("User type id not found!"));
 
-        dto.setId(id);
+        dto.setUserId(id);
         UserType userType = entityType;
 
         User user = UserMapper.dtoToEntity(dto, null, userType);

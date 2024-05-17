@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Builder
 public class UserDto {
 
-    private Long id;
+    private Long userId;
 
     @NotBlank(message = "name not null or empty")
     @Size(min = 5, message = "min value 5 to name")

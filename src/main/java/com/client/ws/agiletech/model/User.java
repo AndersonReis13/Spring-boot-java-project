@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+   private Long usersId;
 
     @Column(nullable = false)
     private String name;
@@ -37,13 +37,14 @@ public class User implements Serializable {
     @Column(name = "dt_Expiration", nullable = false)
     private LocalDate dtExpiration;
 
-    @JoinColumn(name = "User_type_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+
+   @ManyToOne(fetch = FetchType.EAGER)
+   @JoinColumn(name = "User_type_id")
     private UserType userType;
 
 
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subscriptions_type_id")
-    @ManyToOne(fetch = FetchType.LAZY)
     private SubscriptionsType subscriptionsType;
 
 

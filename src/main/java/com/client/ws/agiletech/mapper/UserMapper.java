@@ -9,7 +9,7 @@ public class UserMapper {
 
     public static User dtoToEntity(UserDto dto, SubscriptionsType subscriptionsType, UserType userType){
         return User.builder()
-                .id(dto.getId())
+                .usersId(dto.getUserId())
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .phone(dto.getPhone())
